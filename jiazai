@@ -1,4 +1,4 @@
--- Chmao脚本中心UI（极简净版，仅UI、无功能）
+-- Chmao脚本中心UI（极简净版，已修复并添加功能1按钮）
 local UIS = game:GetService("UserInputService")
 local Players = game:GetService("Players")
 local LP = Players.LocalPlayer
@@ -20,7 +20,6 @@ Frame.Active = true
 Frame.Visible = false
 Frame.Parent = Main
 
--- 添加圆角
 local UICorner = Instance.new("UICorner")
 UICorner.CornerRadius = UDim.new(0, 8)
 UICorner.Parent = Frame
@@ -40,7 +39,7 @@ TopBarCorner.Parent = TopBar
 local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(0, 200, 1, 0)
 Title.Position = UDim2.new(0.5, -100, 0, 0)
-Title.Text =     "CHUOMAO SCRIPT"
+Title.Text = "CHUOMAO SCRIPT"
 Title.Font = Enum.Font.GothamBold
 Title.TextSize = 18
 Title.TextColor3 = Color3.fromRGB(200, 200, 255)
@@ -68,7 +67,7 @@ Sidebar.BackgroundTransparency = 0.2
 Sidebar.BorderSizePixel = 0
 Sidebar.Parent = Frame
 
--- 创建页签按钮（缩小尺寸）
+-- 创建页签按钮
 local TabBtns = {}
 local function createTab(name, order)
     local btn = Instance.new("TextButton")
@@ -156,7 +155,7 @@ ContactLabel.BackgroundTransparency = 1
 ContactLabel.Parent = InfoPage
 
 -- 功能页（空内容）
- createEmptyFeaturePage()
+local function createEmptyFeaturePage()
     local FeaturePage = Instance.new("ScrollingFrame")
     FeaturePage.Size = UDim2.new(1, 0, 1, 0)
     FeaturePage.BackgroundTransparency = 1
@@ -169,8 +168,8 @@ local FeaturePage1 = createEmptyFeaturePage()
 local FeaturePage2 = createEmptyFeaturePage()
 local FeaturePage3 = createEmptyFeaturePage()
 
--- ＝＝＝ 这里是“功能1”页添加“脚本1”按钮的地方 ＝＝＝
-local script1Url = "loadstring(game:HttpGet('https://pastebin.com/raw/3Rnd9rHf'))()"  -- ←←← 改成你自己的脚本直链
+-- ========== 功能1页添加脚本按钮 ==========
+local script1Url = "https://pastebin.com/raw/3Rnd9rHf"   -- 只写链接，不要写loadstring
 local btn1 = Instance.new("TextButton", FeaturePage1)
 btn1.Size = UDim2.new(0, 160, 0, 36)
 btn1.Position = UDim2.new(0, 24, 0, 24)
@@ -184,7 +183,7 @@ corner.CornerRadius = UDim.new(0, 8)
 btn1.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet(script1Url))()
 end)
--- ＝＝＝ 上面这部分就是功能1区的脚本按钮，你只需改链接即可 ＝＝＝
+-- ========== 你可以复制上面几行再加更多按钮，改名/改链接/改Y坐标即可 ==========
 
 -- 页签切换
 local pages = {
