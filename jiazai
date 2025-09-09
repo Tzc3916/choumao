@@ -192,8 +192,8 @@ local FeaturePage1 = createEmptyFeaturePage()
 local FeaturePage2 = createEmptyFeaturePage()
 local FeaturePage3 = createEmptyFeaturePage()
 
-
-local script1Url = "https://raw.githubusercontent.com/Kenniel123/99-Nights-in-the-Forest/refs/heads/main/99%20Nights%20in%20the%20Forest"   
+-- ========== 功能1页添加脚本按钮 ==========
+local script1Url = "https://raw.githubusercontent.com/Kenniel123/99-Nights-in-the-Forest/refs/heads/main/99%20Nights%20in%20the%20Forest"   -- 只写链接，不要写loadstring
 local btn1 = Instance.new("TextButton", FeaturePage1)
 btn1.Size = UDim2.new(0, 160, 0, 36)
 btn1.Position = UDim2.new(0, 24, 0, 24)
@@ -223,7 +223,8 @@ btn2.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet(script2Url))()
 end)
 
-local script3Url = "https://raw.githubusercontent.com/H4xScripts/Loader/refs/heads/main/loader.lua"
+-- 第三个按钮
+local script3Url = "https://raw.githubusercontent.com/H4xScripts/Loader/refs/heads/main/loader.lua", true"
 local btn3 = Instance.new("TextButton", FeaturePage1)
 btn3.Size = UDim2.new(0, 160, 3-1)*48 = 120
 btn3.BackgroundColor3 = Color3.fromRGB(120, 140, 220)
