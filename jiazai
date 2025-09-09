@@ -63,7 +63,7 @@ local CloseBtn = Instance.new("TextButton")
 CloseBtn.Name = "CloseButton"
 CloseBtn.Size = UDim2.new(0, 32, 0, 32)
 CloseBtn.Position = UDim2.new(1, -36, 0, 0)
-CloseBtn.BackgroundColor3 = Color3.fromRGB(90, 110, 180) -- 蓝紫色，与UI协调
+CloseBtn.BackgroundColor3 = Color3.fromRGB(90, 110, 180)
 CloseBtn.Text = "X"
 CloseBtn.Font = Enum.Font.GothamBold
 CloseBtn.TextSize = 18
@@ -73,7 +73,7 @@ local closeCorner = Instance.new("UICorner", CloseBtn)
 closeCorner.CornerRadius = UDim.new(0, 8)
 
 CloseBtn.MouseEnter:Connect(function()
-    CloseBtn.BackgroundColor3 = Color3.fromRGB(60, 80, 150) -- 悬停更深
+    CloseBtn.BackgroundColor3 = Color3.fromRGB(60, 80, 150)
 end)
 CloseBtn.MouseLeave:Connect(function()
     CloseBtn.BackgroundColor3 = Color3.fromRGB(90, 110, 180)
@@ -142,7 +142,7 @@ InfoPage.Parent = ContentFrame
 local Welcome = Instance.new("TextLabel")
 Welcome.Size = UDim2.new(1, -20, 0, 40)
 Welcome.Position = UDim2.new(0, 10, 0, 10)
-Welcome.Text = "欢迎使用wow加载器😎"
+Welcome.Text = "欢迎使用wow加载器😃"
 Welcome.TextColor3 = Color3.fromRGB(200, 200, 255)
 Welcome.TextSize = 24
 Welcome.Font = Enum.Font.GothamBold
@@ -193,7 +193,7 @@ local FeaturePage2 = createEmptyFeaturePage()
 local FeaturePage3 = createEmptyFeaturePage()
 
 -- ========== 功能1页添加脚本按钮 ==========
-local script1Url = "https://raw.githubusercontent.com/Kenniel123/99-Nights-in-the-Forest/refs/heads/main/99%20Nights%20in%20the%20Forest"
+local script1Url = "https://raw.githubusercontent.com/VapeVoidware/VW-Add/main/nightsintheforest.lua"
 local btn1 = Instance.new("TextButton", FeaturePage1)
 btn1.Size = UDim2.new(0, 160, 0, 36)
 btn1.Position = UDim2.new(0, 24, 0, 24)
