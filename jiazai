@@ -1,4 +1,4 @@
--- Chmao脚本中心UI（极简净版，已修复并添加功能1按钮）
+-- Chmao脚本中心UI（极简净版，含右上角优雅X关闭按钮）
 local UIS = game:GetService("UserInputService")
 local Players = game:GetService("Players")
 local LP = Players.LocalPlayer
@@ -57,6 +57,30 @@ coroutine.wrap(function()
         )
     end
 end)()
+
+-- 右上角优雅X关闭按钮
+local CloseBtn = Instance.new("TextButton")
+CloseBtn.Name = "CloseButton"
+CloseBtn.Size = UDim2.new(0, 32, 0, 32)
+CloseBtn.Position = UDim2.new(1, -36, 0, 0)
+CloseBtn.BackgroundColor3 = Color3.fromRGB(90, 110, 180) -- 蓝紫色，与UI协调
+CloseBtn.Text = "X"
+CloseBtn.Font = Enum.Font.GothamBold
+CloseBtn.TextSize = 18
+CloseBtn.TextColor3 = Color3.new(1, 1, 1)
+CloseBtn.Parent = TopBar
+local closeCorner = Instance.new("UICorner", CloseBtn)
+closeCorner.CornerRadius = UDim.new(0, 8)
+
+CloseBtn.MouseEnter:Connect(function()
+    CloseBtn.BackgroundColor3 = Color3.fromRGB(60, 80, 150) -- 悬停更深
+end)
+CloseBtn.MouseLeave:Connect(function()
+    CloseBtn.BackgroundColor3 = Color3.fromRGB(90, 110, 180)
+end)
+CloseBtn.MouseButton1Click:Connect(function()
+    Main:Destroy()
+end)
 
 -- 左侧导航栏
 local Sidebar = Instance.new("Frame")
