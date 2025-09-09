@@ -193,7 +193,7 @@ local FeaturePage2 = createEmptyFeaturePage()
 local FeaturePage3 = createEmptyFeaturePage()
 
 -- ========== 功能1页添加脚本按钮 ==========
-local script1Url = "https://raw.githubusercontent.com/Kenniel123/99-Nights-in-the-Forest/refs/heads/main/99%20Nights%20in%20the%20Forest"   -- 只写链接，不要写loadstring
+local script1Url = "https://raw.githubusercontent.com/Kenniel123/99-Nights-in-the-Forest/refs/heads/main/99%20Nights%20in%20the%20Forest"
 local btn1 = Instance.new("TextButton", FeaturePage1)
 btn1.Size = UDim2.new(0, 160, 0, 36)
 btn1.Position = UDim2.new(0, 24, 0, 24)
@@ -211,7 +211,7 @@ end)
 local script2Url = "https://raw.githubusercontent.com/kedd063/KdmlScripts/refs/heads/main/SkyBaseMakerV1.lua"
 local btn2 = Instance.new("TextButton", FeaturePage1)
 btn2.Size = UDim2.new(0, 160, 0, 36)
-btn2.Position = UDim2.new(0, 24, 0, 72)  -- 24+36+12（行距大一点防止重叠）
+btn2.Position = UDim2.new(0, 24, 0, 72)
 btn2.BackgroundColor3 = Color3.fromRGB(100, 120, 200)
 btn2.Text = "空中家具要解卡"
 btn2.Font = Enum.Font.GothamBold
@@ -223,10 +223,10 @@ btn2.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet(script2Url))()
 end)
 
--- 第三个按钮
-local script3Url = "https://raw.githubusercontent.com/H4xScripts/Loader/refs/heads/main/loader.lua", true"
+local script3Url = "https://raw.githubusercontent.com/H4xScripts/Loader/refs/heads/main/loader.lua"
 local btn3 = Instance.new("TextButton", FeaturePage1)
-btn3.Size = UDim2.new(0, 160, 3-1)*48 = 120
+btn3.Size = UDim2.new(0, 160, 0, 36)
+btn3.Position = UDim2.new(0, 24, 0, 120)
 btn3.BackgroundColor3 = Color3.fromRGB(120, 140, 220)
 btn3.Text = "要解卡密"
 btn3.Font = Enum.Font.GothamBold
@@ -238,9 +238,7 @@ btn3.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet(script3Url))()
 end)
 
-
-
--- ========== 你可以复制上面几行再加更多按钮，改名/改链接/改Y坐标即可 ==========
+-- ========== 你可以继续复制上面几行再加更多按钮，改名/改链接/改Y坐标即可 ==========
 
 local pages = {
     [infoTab] = InfoPage,
