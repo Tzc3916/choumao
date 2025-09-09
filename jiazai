@@ -1,4 +1,4 @@
--- Chmao脚本中心UI（极简净版，含右上角优雅X关闭按钮）
+-- Chmao脚本中心UI（极简净版，含右上角优雅X关闭按钮，三页各8按钮）
 local UIS = game:GetService("UserInputService")
 local Players = game:GetService("Players")
 local LP = Players.LocalPlayer
@@ -39,7 +39,7 @@ TopBarCorner.Parent = TopBar
 local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(0, 200, 1, 0)
 Title.Position = UDim2.new(0.5, -100, 0, 0)
-Title.Text = "CHUOMAO SCRIPT"
+Title.Text = "WOW"
 Title.Font = Enum.Font.GothamBold
 Title.TextSize = 18
 Title.TextColor3 = Color3.fromRGB(200, 200, 255)
@@ -63,7 +63,7 @@ local CloseBtn = Instance.new("TextButton")
 CloseBtn.Name = "CloseButton"
 CloseBtn.Size = UDim2.new(0, 32, 0, 32)
 CloseBtn.Position = UDim2.new(1, -36, 0, 0)
-CloseBtn.BackgroundColor3 = Color3.fromRGB(90, 110, 180) -- 蓝紫色，与UI协调
+CloseBtn.BackgroundColor3 = Color3.fromRGB(90, 110, 180)
 CloseBtn.Text = "X"
 CloseBtn.Font = Enum.Font.GothamBold
 CloseBtn.TextSize = 18
@@ -73,7 +73,7 @@ local closeCorner = Instance.new("UICorner", CloseBtn)
 closeCorner.CornerRadius = UDim.new(0, 8)
 
 CloseBtn.MouseEnter:Connect(function()
-    CloseBtn.BackgroundColor3 = Color3.fromRGB(60, 80, 150) -- 悬停更深
+    CloseBtn.BackgroundColor3 = Color3.fromRGB(60, 80, 150)
 end)
 CloseBtn.MouseLeave:Connect(function()
     CloseBtn.BackgroundColor3 = Color3.fromRGB(90, 110, 180)
@@ -91,10 +91,8 @@ Sidebar.BackgroundTransparency = 0.2
 Sidebar.BorderSizePixel = 0
 Sidebar.Parent = Frame
 
--- 创建页签按钮
 local TabBtns = {}
-local function createTab(name, order)
-    local btn = Instance.new("TextButton")
+local function    local btn = Instance.new("TextButton")
     btn.Name = "Tab_"..name
     btn.Size = UDim2.new(0.9, 0, 0, 30)
     btn.Position = UDim2.new(0.05, 0, 0, (order-1)*36 + 8)
@@ -118,20 +116,17 @@ local function createTab(name, order)
     return btn
 end
 
--- 创建页签
-local infoTab = createTab("信息", 1)
-local func1Tab = createTab("功能1", 2)
-local func2Tab = createTab("功能2", 3)
-local func3Tab = createTab("功能3", 4)
+local infoTab = createTab("主页", 1)
+local func1Tab = createTab("森林99夜", 2)
+local func2Tab = createTab("偷走脑红", 3)
+local func3Tab = createTab("墨水游戏", 4)
 
--- 主内容区域
 local ContentFrame = Instance.new("Frame")
 ContentFrame.Size = UDim2.new(1, -100, 1, -32)
 ContentFrame.Position = UDim2.new(0, 100, 0, 32)
 ContentFrame.BackgroundTransparency = 1
 ContentFrame.Parent = Frame
 
--- 信息页
 local InfoPage = Instance.new("Frame")
 InfoPage.Size = UDim2.new(1, 0, 1, 0)
 InfoPage.BackgroundTransparency = 1
@@ -142,7 +137,7 @@ InfoPage.Parent = ContentFrame
 local Welcome = Instance.new("TextLabel")
 Welcome.Size = UDim2.new(1, -20, 0, 40)
 Welcome.Position = UDim2.new(0, 10, 0, 10)
-Welcome.Text = "欢迎使用臭猫脚本"
+Welcome.Text = "欢迎使用WOW加载器🤓"
 Welcome.TextColor3 = Color3.fromRGB(200, 200, 255)
 Welcome.TextSize = 24
 Welcome.Font = Enum.Font.GothamBold
@@ -170,7 +165,7 @@ end)()
 local ContactLabel = Instance.new("TextLabel")
 ContactLabel.Size = UDim2.new(1, -20, 0, 80)
 ContactLabel.Position = UDim2.new(0, 10, 0, 90)
-ContactLabel.Text = "QQ群: 962873051\n作者: 2563684259\n更新时间: 2025年8月16日"
+ContactLabel.Text = "QQ群: 962873051\n脚本的Ui有点差别介意会经常更新\n上次时间: 2025年8月1日"
 ContactLabel.TextColor3 = Color3.fromRGB(170, 170, 200)
 ContactLabel.TextSize = 14
 ContactLabel.Font = Enum.Font.Gotham
@@ -178,7 +173,6 @@ ContactLabel.TextYAlignment = Enum.TextYAlignment.Top
 ContactLabel.BackgroundTransparency = 1
 ContactLabel.Parent = InfoPage
 
--- 功能页（空内容）
 local function createEmptyFeaturePage()
     local FeaturePage = Instance.new("ScrollingFrame")
     FeaturePage.Size = UDim2.new(1, 0, 1, 0)
@@ -192,22 +186,59 @@ local FeaturePage1 = createEmptyFeaturePage()
 local FeaturePage2 = createEmptyFeaturePage()
 local FeaturePage3 = createEmptyFeaturePage()
 
--- ========== 功能1页添加脚本按钮 ==========
-local script1Url = "https://pastebin.com/raw/3Rnd9rHf"   -- 只写链接，不要写loadstring
-local btn1 = Instance.new("TextButton", FeaturePage1)
-btn1.Size = UDim2.new(0, 160, 0, 36)
-btn1.Position = UDim2.new(0, 24, 0, 24)
-btn1.BackgroundColor3 = Color3.fromRGB(80, 100, 180)
-btn1.Text = "脚本1"
-btn1.Font = Enum.Font.GothamBold
-btn1.TextSize = 14
-btn1.TextColor3 = Color3.new(1, 1, 1)
-local corner = Instance.new("UICorner", btn1)
-corner.CornerRadius = UDim.new(0, 8)
-btn1.MouseButton1Click:Connect(function()
-    loadstring(game:HttpGet(script1Url))()
-end)
--- ========== 你可以复制上面几行再加更多按钮，改名/改链接/改Y坐标即可 ==========
+-- ========== 批量生成脚本按钮 ==========
+local function addButtonsToPage(page, btnList)
+    for i, v in ipairs(btnList) do
+        local btn = Instance.new("TextButton", page)
+        btn.Size = UDim2.new(0, 160, 0, 36)
+        btn.Position = UDim2.new(0, 24, 0, 24 + (i-1)*48)
+        btn.BackgroundColor3 = v.color or Color3.fromRGB(80, 100, 180)
+        btn.Text = v.name
+        btn.Font = Enum.Font.GothamBold
+        btn.TextSize = 14
+        btn.TextColor3 = Color3.new(1, 1, 1)
+        Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 8)
+        btn.MouseButton1Click:Connect(function()
+            loadstring(game:HttpGet(v.url))()
+        end)
+    end
+end
+
+-- 功能1页 8个按钮
+addButtonsToPage(FeaturePage1, {
+    {name="99页无卡密脚本", url="game:HttpGet("https://raw.githubusercontent.com/Kenniel123/99-Nights-in-the-Forest/refs/heads/main/99%20Nights%20in%20the%20Forest", color=Color3.fromRGB(80,100,180)},
+    {name="脚本1-2", url="https://your-url2.com/raw/xxx", color=Color3.fromRGB(100,120,200)},
+    {name="脚本1-3", url="https://your-url3.com/raw/xxx", color=Color3.fromRGB(120,140,220)},
+    {name="脚本1-4", url="https://your-url4.com/raw/xxx", color=Color3.fromRGB(80,120,160)},
+    {name="脚本1-5", url="https://your-url5.com/raw/xxx", color=Color3.fromRGB(120,150,180)},
+    {name="脚本1-6", url="https://your-url6.com/raw/xxx", color=Color3.fromRGB(100,130,210)},
+    {name="脚本1-7", url="https://your-url7.com/raw/xxx", color=Color3.fromRGB(140,170,220)},
+    {name="脚本1-8", url="https://your-url8.com/raw/xxx", color=Color3.fromRGB(110,130,160)},
+})
+
+-- 功能2页 8个按钮
+addButtonsToPage(FeaturePage2, {
+    {name="脚本2-1", url="https://your-url9.com/raw/xxx", color=Color3.fromRGB(80,100,180)},
+    {name="脚本2-2", url="https://your-url10.com/raw/xxx", color=Color3.fromRGB(100,120,200)},
+    {name="脚本2-3", url="https://your-url11.com/raw/xxx", color=Color3.fromRGB(120,140,220)},
+    {name="脚本2-4", url="https://your-url12.com/raw/xxx", color=Color3.fromRGB(80,120,160)},
+    {name="脚本2-5", url="https://your-url13.com/raw/xxx", color=Color3.fromRGB(120,150,180)},
+    {name="脚本2-6", url="https://your-url14.com/raw/xxx", color=Color3.fromRGB(100,130,210)},
+    {name="脚本2-7", url="https://your-url15.com/raw/xxx", color=Color3.fromRGB(140,170,220)},
+    {name="脚本2-8", url="https://your-url16.com/raw/xxx", color=Color3.fromRGB(110,130,160)},
+})
+
+-- 功能3页 8个按钮
+addButtonsToPage(FeaturePage3, {
+    {name="脚本3-1", url="https://your-url17.com/raw/xxx", color=Color3.fromRGB(80,100,180)},
+    {name="脚本3-2", url="https://your-url18.com/raw/xxx", color=Color3.fromRGB(100,120,200)},
+    {name="脚本3-3", url="https://your-url19.com/raw/xxx", color=Color3.fromRGB(120,140,220)},
+    {name="脚本3-4", url="https://your-url20.com/raw/xxx", color=Color3.fromRGB(80,120,160)},
+    {name="脚本3-5", url="https://your-url21.com/raw/xxx", color=Color3.fromRGB(120,150,180)},
+    {name="脚本3-6", url="https://your-url22.com/raw/xxx", color=Color3.fromRGB(100,130,210)},
+    {name="脚本3-7", url="https://your-url23.com/raw/xxx", color=Color3.fromRGB(140,170,220)},
+    {name="脚本3-8", url="https://your-url24.com/raw/xxx", color=Color3.fromRGB(110,130,160)},
+})
 
 -- 页签切换
 local pages = {
@@ -244,7 +275,6 @@ local ToggleCorner = Instance.new("UICorner")
 ToggleCorner.CornerRadius = UDim.new(0, 8)
 ToggleCorner.Parent = ToggleBtn
 
--- 拖动逻辑
 local btnDragging, btnDragStart, btnStartPos
 local function handleDrag(input)
     if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
@@ -315,13 +345,11 @@ UIS.InputChanged:Connect(function(input)
     end
 end)
 
--- 切换显示/隐藏
 ToggleBtn.MouseButton1Click:Connect(function()
     Frame.Visible = not Frame.Visible
     ToggleBtn.Text = Frame.Visible and "关闭脚本" or "打开脚本"
 end)
 
--- 初始显示信息页
 InfoPage.Visible = true
 FeaturePage1.Visible = false
 FeaturePage2.Visible = false
