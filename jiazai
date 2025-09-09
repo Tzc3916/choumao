@@ -1,4 +1,4 @@
--- Chmao脚本中心UI（极简净版，已修复并添加功能1按钮）
+-- Chmao脚本中心UI（极简净版，仅UI、无功能）
 local UIS = game:GetService("UserInputService")
 local Players = game:GetService("Players")
 local LP = Players.LocalPlayer
@@ -20,6 +20,7 @@ Frame.Active = true
 Frame.Visible = false
 Frame.Parent = Main
 
+-- 添加圆角
 local UICorner = Instance.new("UICorner")
 UICorner.CornerRadius = UDim.new(0, 8)
 UICorner.Parent = Frame
@@ -39,7 +40,7 @@ TopBarCorner.Parent = TopBar
 local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(0, 200, 1, 0)
 Title.Position = UDim2.new(0.5, -100, 0, 0)
-Title.Text = "CHUOMAO SCRIPT"
+Title.Text =     "CHUOMAO SCRIPT"
 Title.Font = Enum.Font.GothamBold
 Title.TextSize = 18
 Title.TextColor3 = Color3.fromRGB(200, 200, 255)
@@ -67,7 +68,7 @@ Sidebar.BackgroundTransparency = 0.2
 Sidebar.BorderSizePixel = 0
 Sidebar.Parent = Frame
 
--- 创建页签按钮
+-- 创建页签按钮（缩小尺寸）
 local TabBtns = {}
 local function createTab(name, order)
     local btn = Instance.new("TextButton")
@@ -167,23 +168,6 @@ end
 local FeaturePage1 = createEmptyFeaturePage()
 local FeaturePage2 = createEmptyFeaturePage()
 local FeaturePage3 = createEmptyFeaturePage()
-
--- ========== 功能1页添加脚本按钮 ==========
-local script1Url = "https://pastebin.com/raw/3Rnd9rHf"   -- 只写链接，不要写loadstring
-local btn1 = Instance.new("TextButton", FeaturePage1)
-btn1.Size = UDim2.new(0, 160, 0, 36)
-btn1.Position = UDim2.new(0, 24, 0, 24)
-btn1.BackgroundColor3 = Color3.fromRGB(80, 100, 180)
-btn1.Text = "脚本1"
-btn1.Font = Enum.Font.GothamBold
-btn1.TextSize = 14
-btn1.TextColor3 = Color3.new(1, 1, 1)
-local corner = Instance.new("UICorner", btn1)
-corner.CornerRadius = UDim.new(0, 8)
-btn1.MouseButton1Click:Connect(function()
-    loadstring(game:HttpGet(script1Url))()
-end)
--- ========== 你可以复制上面几行再加更多按钮，改名/改链接/改Y坐标即可 ==========
 
 -- 页签切换
 local pages = {
