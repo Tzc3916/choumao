@@ -142,7 +142,7 @@ InfoPage.Parent = ContentFrame
 local Welcome = Instance.new("TextLabel")
 Welcome.Size = UDim2.new(1, -20, 0, 40)
 Welcome.Position = UDim2.new(0, 10, 0, 10)
-Welcome.Text = "欢迎使用wow加载器🤓"
+Welcome.Text = "欢迎使用wow加载器😎"
 Welcome.TextColor3 = Color3.fromRGB(200, 200, 255)
 Welcome.TextSize = 24
 Welcome.Font = Enum.Font.GothamBold
@@ -170,7 +170,7 @@ end)()
 local ContactLabel = Instance.new("TextLabel")
 ContactLabel.Size = UDim2.new(1, -20, 0, 80)
 ContactLabel.Position = UDim2.new(0, 10, 0, 90)
-ContactLabel.Text = "QQ群: 962873051\n Ui有点差别介意会经常更新\n上次更新时间: 2025年8月16日"
+ContactLabel.Text = "QQ群: 962873051\n Ui有点差别介意但会经常更新\n上次更新时间: 2025年8月16日"
 ContactLabel.TextColor3 = Color3.fromRGB(170, 170, 200)
 ContactLabel.TextSize = 14
 ContactLabel.Font = Enum.Font.Gotham
@@ -192,13 +192,13 @@ local FeaturePage1 = createEmptyFeaturePage()
 local FeaturePage2 = createEmptyFeaturePage()
 local FeaturePage3 = createEmptyFeaturePage()
 
--- ========== 功能1页添加脚本按钮 ==========
-local script1Url = "https://raw.githubusercontent.com/Kenniel123/99-Nights-in-the-Forest/refs/heads/main/99%20Nights%20in%20the%20Forest"   -- 只写链接，不要写loadstring
+
+local script1Url = "https://raw.githubusercontent.com/Kenniel123/99-Nights-in-the-Forest/refs/heads/main/99%20Nights%20in%20the%20Forest"   
 local btn1 = Instance.new("TextButton", FeaturePage1)
 btn1.Size = UDim2.new(0, 160, 0, 36)
 btn1.Position = UDim2.new(0, 24, 0, 24)
 btn1.BackgroundColor3 = Color3.fromRGB(80, 100, 180)
-btn1.Text = "完美脚本不用解卡"
+btn1.Text = "老外脚本不用解卡"
 btn1.Font = Enum.Font.GothamBold
 btn1.TextSize = 14
 btn1.TextColor3 = Color3.new(1, 1, 1)
@@ -213,7 +213,7 @@ local btn2 = Instance.new("TextButton", FeaturePage1)
 btn2.Size = UDim2.new(0, 160, 0, 36)
 btn2.Position = UDim2.new(0, 24, 0, 72)  -- 24+36+12（行距大一点防止重叠）
 btn2.BackgroundColor3 = Color3.fromRGB(100, 120, 200)
-btn2.Text = "天上放物品脚本"
+btn2.Text = "空中家具要解卡"
 btn2.Font = Enum.Font.GothamBold
 btn2.TextSize = 14
 btn2.TextColor3 = Color3.new(1, 1, 1)
@@ -222,6 +222,23 @@ corner2.CornerRadius = UDim.new(0, 8)
 btn2.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet(script2Url))()
 end)
+
+local script3Url = "https://raw.githubusercontent.com/H4xScripts/Loader/refs/heads/main/loader.lua"
+local btn3 = Instance.new("TextButton", FeaturePage1)
+btn3.Size = UDim2.new(0, 160, 3-1)*48 = 120
+btn3.BackgroundColor3 = Color3.fromRGB(120, 140, 220)
+btn3.Text = "要解卡密"
+btn3.Font = Enum.Font.GothamBold
+btn3.TextSize = 14
+btn3.TextColor3 = Color3.new(1, 1, 1)
+local corner3 = Instance.new("UICorner", btn3)
+corner3.CornerRadius = UDim.new(0, 8)
+btn3.MouseButton1Click:Connect(function()
+    loadstring(game:HttpGet(script3Url))()
+end)
+
+
+
 -- ========== 你可以复制上面几行再加更多按钮，改名/改链接/改Y坐标即可 ==========
 
 local pages = {
