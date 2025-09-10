@@ -1,6 +1,7 @@
--- Chmao脚本中心UI（极简净版，含右上角优雅X关闭按钮）
+-- Chmao脚本中心UI（高级感优化版）
 local UIS = game:GetService("UserInputService")
 local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
 local LP = Players.LocalPlayer
 
 -- 创建主UI
@@ -9,129 +10,152 @@ Main.Name = "ChmaoScriptUI"
 Main.ResetOnSpawn = false
 Main.Parent = game.CoreGui
 
--- 主框架
+-- 主框架（玻璃态效果）
 local Frame = Instance.new("Frame")
-Frame.Size = UDim2.new(0, 500, 0, 300)
-Frame.Position = UDim2.new(0.5, -250, 0.5, -150)
-Frame.BackgroundColor3 = Color3.fromRGB(50, 50, 60)
-Frame.BackgroundTransparency = 0.15
+Frame.Size = UDim2.new(0, 520, 0, 340)
+Frame.Position = UDim2.new(0.5, -260, 0.5, -170)
+Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+Frame.BackgroundTransparency = 0.2
 Frame.BorderSizePixel = 0
 Frame.Active = true
 Frame.Visible = false
 Frame.Parent = Main
 
+-- 玻璃态模糊效果
 local UICorner = Instance.new("UICorner")
-UICorner.CornerRadius = UDim.new(0, 8)
+UICorner.CornerRadius = UDim.new(0, 12)
 UICorner.Parent = Frame
 
--- 顶部栏
+local UIStroke = Instance.new("UIStroke")
+UIStroke.Thickness = 1
+UIStroke.Color = Color3.fromRGB(100, 100, 150)
+UIStroke.Transparency = 0.7
+UIStroke.Parent = Frame
+
+-- 顶部栏（渐变效果）
 local TopBar = Instance.new("Frame")
-TopBar.Size = UDim2.new(1, 0, 0, 32)
-TopBar.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+TopBar.Size = UDim2.new(1, 0, 0, 40)
+TopBar.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
 TopBar.BorderSizePixel = 0
 TopBar.Parent = Frame
 
 local TopBarCorner = Instance.new("UICorner")
-TopBarCorner.CornerRadius = UDim.new(0, 8)
+TopBarCorner.CornerRadius = UDim.new(0, 12)
 TopBarCorner.Parent = TopBar
 
--- 标题文字
+-- 标题文字（霓虹效果）
 local Title = Instance.new("TextLabel")
-Title.Size = UDim2.new(0, 200, 1, 0)
-Title.Position = UDim2.new(0.5, -100, 0, 0)
-Title.Text = "CHUOMAO SCRIPT"
-Title.Font = Enum.Font.GothamBold
-Title.TextSize = 18
-Title.TextColor3 = Color3.fromRGB(200, 200, 255)
+Title.Size = UDim2.new(0, 220, 1, 0)
+Title.Position = UDim2.new(0.5, -110, 0, 0)
+Title.Text = "WOW LOADER"
+Title.Font = Enum.Font.GothamBlack
+Title.TextSize = 20
+Title.TextColor3 = Color3.fromRGB(180, 180, 255)
 Title.BackgroundTransparency = 1
 Title.Parent = TopBar
 
--- 彩色渐变效果
+-- 霓虹渐变效果
 coroutine.wrap(function()
-    while task.wait(0.05) do
-        local t = tick() * 1.5
+    while task.wait(0.03) do
+        local t = tick() * 2
         Title.TextColor3 = Color3.new(
-            0.7 + 0.3 * math.sin(t),
-            0.7 + 0.3 * math.sin(t + 2),
-            0.7 + 0.3 * math.sin(t + 4)
+            0.6 + 0.4 * math.sin(t),
+            0.6 + 0.4 * math.sin(t + 2),
+            0.8 + 0.2 * math.sin(t + 4)
         )
     end
 end)()
 
--- 右上角优雅X关闭按钮
-local CloseBtn = Instance.new("TextButton")
+-- 右上角高级关闭按钮
+local CloseBtn = Instance.new("ImageButton")
 CloseBtn.Name = "CloseButton"
-CloseBtn.Size = UDim2.new(0, 32, 0, 32)
-CloseBtn.Position = UDim2.new(1, -36, 0, 0)
-CloseBtn.BackgroundColor3 = Color3.fromRGB(90, 110, 180)
-CloseBtn.Text = "X"
-CloseBtn.Font = Enum.Font.GothamBold
-CloseBtn.TextSize = 18
-CloseBtn.TextColor3 = Color3.new(1, 1, 1)
+CloseBtn.Size = UDim2.new(0, 28, 0, 28)
+CloseBtn.Position = UDim2.new(1, -34, 0, 6)
+CloseBtn.BackgroundColor3 = Color3.fromRGB(60, 60, 80)
+CloseBtn.Image = "rbxassetid://10734951820" -- 现代X图标
+CloseBtn.ScaleType = Enum.ScaleType.Fit
 CloseBtn.Parent = TopBar
+
 local closeCorner = Instance.new("UICorner", CloseBtn)
-closeCorner.CornerRadius = UDim.new(0, 8)
+closeCorner.CornerRadius = UDim.new(1, 0)
 
 CloseBtn.MouseEnter:Connect(function()
-    CloseBtn.BackgroundColor3 = Color3.fromRGB(60, 80, 150)
+    TweenService:Create(CloseBtn, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(200, 80, 80)}):Play()
 end)
 CloseBtn.MouseLeave:Connect(function()
-    CloseBtn.BackgroundColor3 = Color3.fromRGB(90, 110, 180)
+    TweenService:Create(CloseBtn, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(60, 60, 80)}):Play()
 end)
 CloseBtn.MouseButton1Click:Connect(function()
+    TweenService:Create(Frame, TweenInfo.new(0.3), {Size = UDim2.new(0, 0, 0, 0), Position = UDim2.new(0.5, 0, 0.5, 0)}):Play()
+    task.wait(0.3)
     Main:Destroy()
 end)
 
--- 左侧导航栏
+-- 左侧导航栏（磨砂玻璃效果）
 local Sidebar = Instance.new("Frame")
-Sidebar.Size = UDim2.new(0, 100, 1, -32)
-Sidebar.Position = UDim2.new(0, 0, 0, 32)
-Sidebar.BackgroundColor3 = Color3.fromRGB(45, 45, 55)
-Sidebar.BackgroundTransparency = 0.2
+Sidebar.Size = UDim2.new(0, 110, 1, -40)
+Sidebar.Position = UDim2.new(0, 0, 0, 40)
+Sidebar.BackgroundColor3 = Color3.fromRGB(35, 35, 45)
+Sidebar.BackgroundTransparency = 0.1
 Sidebar.BorderSizePixel = 0
 Sidebar.Parent = Frame
 
--- 创建页签按钮
+-- 创建页签按钮（现代设计）
 local TabBtns = {}
-local function createTab(name, order)
+local function createTab(name, order, iconId)
     local btn = Instance.new("TextButton")
     btn.Name = "Tab_"..name
-    btn.Size = UDim2.new(0.9, 0, 0, 30)
-    btn.Position = UDim2.new(0.05, 0, 0, (order-1)*36 + 8)
-    btn.BackgroundColor3 = Color3.fromRGB(65, 65, 85)
-    btn.TextColor3 = Color3.fromRGB(220, 220, 255)
+    btn.Size = UDim2.new(0.85, 0, 0, 36)
+    btn.Position = UDim2.new(0.075, 0, 0, (order-1)*42 + 12)
+    btn.BackgroundColor3 = Color3.fromRGB(50, 50, 70)
+    btn.TextColor3 = Color3.fromRGB(200, 200, 255)
     btn.Font = Enum.Font.GothamMedium
-    btn.Text = name
-    btn.TextSize = 12
+    btn.Text = "  "..name
+    btn.TextSize = 13
+    btn.TextXAlignment = Enum.TextXAlignment.Left
     btn.AutoButtonColor = false
     btn.Parent = Sidebar
+    
     local btnCorner = Instance.new("UICorner")
-    btnCorner.CornerRadius = UDim.new(0, 6)
+    btnCorner.CornerRadius = UDim.new(0, 8)
     btnCorner.Parent = btn
+    
+    -- 添加图标
+    if iconId then
+        local icon = Instance.new("ImageLabel")
+        icon.Size = UDim2.new(0, 20, 0, 20)
+        icon.Position = UDim2.new(0, 8, 0.5, -10)
+        icon.Image = "rbxassetid://"..iconId
+        icon.BackgroundTransparency = 1
+        icon.Parent = btn
+    end
+    
     btn.MouseEnter:Connect(function()
-        btn.BackgroundColor3 = Color3.fromRGB(85, 85, 105)
+        TweenService:Create(btn, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(70, 70, 100)}):Play()
     end)
+    
     btn.MouseLeave:Connect(function()
-        btn.BackgroundColor3 = Color3.fromRGB(65, 65, 85)
+        TweenService:Create(btn, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(50, 50, 70)}):Play()
     end)
+    
     TabBtns[name..order] = btn
     return btn
 end
 
--- 创建页签
-local infoTab = createTab("主页", 1)
-local func1Tab = createTab("森林存活99夜", 2)
-local func2Tab = createTab("偷走脑红", 3)
-local func3Tab = createTab("功能3", 4)
+-- 创建页签（带图标）
+local infoTab = createTab("主页", 1, "10734951820")
+local func1Tab = createTab("森林存活", 2, "10734951820")
+local func2Tab = createTab("偷走脑红", 3, "10734951820")
+local func3Tab = createTab("设置", 4, "10734951820")
 
 -- 主内容区域
 local ContentFrame = Instance.new("Frame")
-ContentFrame.Size = UDim2.new(1, -100, 1, -32)
-ContentFrame.Position = UDim2.new(0, 100, 0, 32)
+ContentFrame.Size = UDim2.new(1, -110, 1, -40)
+ContentFrame.Position = UDim2.new(0, 110, 0, 40)
 ContentFrame.BackgroundTransparency = 1
 ContentFrame.Parent = Frame
 
--- 信息页
+-- 信息页（现代设计）
 local InfoPage = Instance.new("Frame")
 InfoPage.Size = UDim2.new(1, 0, 1, 0)
 InfoPage.BackgroundTransparency = 1
@@ -140,21 +164,21 @@ InfoPage.Parent = ContentFrame
 
 -- 欢迎信息
 local Welcome = Instance.new("TextLabel")
-Welcome.Size = UDim2.new(1, -20, 0, 40)
-Welcome.Position = UDim2.new(0, 10, 0, 10)
-Welcome.Text = "欢迎使用wow加载器😃"
-Welcome.TextColor3 = Color3.fromRGB(200, 200, 255)
-Welcome.TextSize = 24
-Welcome.Font = Enum.Font.GothamBold
+Welcome.Size = UDim2.new(1, -40, 0, 50)
+Welcome.Position = UDim2.new(0, 20, 0, 20)
+Welcome.Text = "🌟 WOW LOADER v2.0"
+Welcome.TextColor3 = Color3.fromRGB(220, 220, 255)
+Welcome.TextSize = 28
+Welcome.Font = Enum.Font.GothamBlack
 Welcome.BackgroundTransparency = 1
 Welcome.Parent = InfoPage
 
 -- 实时时间
 local TimeLabel = Instance.new("TextLabel")
-TimeLabel.Size = UDim2.new(1, -20, 0, 30)
-TimeLabel.Position = UDim2.new(0, 10, 0, 50)
-TimeLabel.Text = os.date("%Y-%m-%d %H:%M:%S")
-TimeLabel.TextColor3 = Color3.fromRGB(180, 180, 220)
+TimeLabel.Size = UDim2.new(1, -40, 0, 30)
+TimeLabel.Position = UDim2.new(0, 20, 0, 80)
+TimeLabel.Text = "🕒 "..os.date("%Y-%m-%d %H:%M:%S")
+TimeLabel.TextColor3 = Color3.fromRGB(180, 200, 255)
 TimeLabel.TextSize = 16
 TimeLabel.Font = Enum.Font.Gotham
 TimeLabel.BackgroundTransparency = 1
@@ -162,199 +186,220 @@ TimeLabel.Parent = InfoPage
 
 coroutine.wrap(function()
     while task.wait(1) do
-        TimeLabel.Text = os.date("%Y-%m-%d %H:%M:%S")
+        TimeLabel.Text = "🕒 "..os.date("%Y-%m-%d %H:%M:%S")
     end
 end)()
 
 -- 联系信息
 local ContactLabel = Instance.new("TextLabel")
-ContactLabel.Size = UDim2.new(1, -20, 0, 80)
-ContactLabel.Position = UDim2.new(0, 10, 0, 90)
-ContactLabel.Text = "QQ群: 962873051\n Ui有点差别介意但会经常更新\n上次更新时间: 2025年8月16日"
-ContactLabel.TextColor3 = Color3.fromRGB(170, 170, 200)
+ContactLabel.Size = UDim2.new(1, -40, 0, 100)
+ContactLabel.Position = UDim2.new(0, 20, 0, 120)
+ContactLabel.Text = "📱 QQ群: 962873051\n🎨 UI设计: 高级玻璃态\n🔄 最后更新: 2025.8.16\n⚡ 状态: 运行中 ✅"
+ContactLabel.TextColor3 = Color3.fromRGB(170, 190, 220)
 ContactLabel.TextSize = 14
 ContactLabel.Font = Enum.Font.Gotham
 ContactLabel.TextYAlignment = Enum.TextYAlignment.Top
 ContactLabel.BackgroundTransparency = 1
 ContactLabel.Parent = InfoPage
 
--- 功能页（空内容）
-local function createEmptyFeaturePage()
+-- 功能页设计
+local function createFeaturePage()
     local FeaturePage = Instance.new("ScrollingFrame")
     FeaturePage.Size = UDim2.new(1, 0, 1, 0)
     FeaturePage.BackgroundTransparency = 1
-    FeaturePage.ScrollBarThickness = 6
+    FeaturePage.ScrollBarThickness = 4
+    FeaturePage.ScrollBarImageColor3 = Color3.fromRGB(100, 100, 150)
     FeaturePage.Visible = false
     FeaturePage.Parent = ContentFrame
     return FeaturePage
 end
-local FeaturePage1 = createEmptyFeaturePage()
-local FeaturePage2 = createEmptyFeaturePage()
-local FeaturePage3 = createEmptyFeaturePage()
 
--- ========== 功能1页添加脚本按钮 ==========
-local script1Url = "https://raw.githubusercontent.com/VapeVoidware/VW-Add/main/nightsintheforest.lua"
-local btn1 = Instance.new("TextButton", FeaturePage1)
-btn1.Size = UDim2.new(0, 160, 0, 36)
-btn1.Position = UDim2.new(0, 24, 0, 24)
-btn1.BackgroundColor3 = Color3.fromRGB(80, 100, 180)
-btn1.Text = "老外脚本不用解卡"
-btn1.Font = Enum.Font.GothamBold
-btn1.TextSize = 14
-btn1.TextColor3 = Color3.new(1, 1, 1)
-local corner = Instance.new("UICorner", btn1)
-corner.CornerRadius = UDim.new(0, 8)
+local FeaturePage1 = createFeaturePage()
+local FeaturePage2 = createFeaturePage()
+local FeaturePage3 = createFeaturePage()
+
+-- 高级按钮创建函数
+local function createModernButton(parent, text, yPos, color, icon)
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(0, 180, 0, 42)
+    btn.Position = UDim2.new(0, 30, 0, yPos)
+    btn.BackgroundColor3 = color
+    btn.Text = "   "..text
+    btn.Font = Enum.Font.GothamBold
+    btn.TextSize = 14
+    btn.TextColor3 = Color3.new(1, 1, 1)
+    btn.TextXAlignment = Enum.TextXAlignment.Left
+    btn.AutoButtonColor = false
+    btn.Parent = parent
+    
+    local corner = Instance.new("UICorner", btn)
+    corner.CornerRadius = UDim.new(0, 10)
+    
+    local stroke = Instance.new("UIStroke", btn)
+    stroke.Thickness = 1
+    stroke.Color = Color3.fromRGB(255, 255, 255)
+    stroke.Transparency = 0.8
+    
+    -- 添加图标
+    if icon then
+        local iconLabel = Instance.new("ImageLabel")
+        iconLabel.Size = UDim2.new(0, 24, 0, 24)
+        iconLabel.Position = UDim2.new(0, 12, 0.5, -12)
+        iconLabel.Image = "rbxassetid://"..icon
+        iconLabel.BackgroundTransparency = 1
+        iconLabel.Parent = btn
+    end
+    
+    -- 悬停动画
+    btn.MouseEnter:Connect(function()
+        TweenService:Create(btn, TweenInfo.new(0.2), {Size = UDim2.new(0, 190, 0, 44)}):Play()
+        TweenService:Create(btn, TweenInfo.new(0.2), {BackgroundTransparency = 0.1}):Play()
+    end)
+    
+    btn.MouseLeave:Connect(function()
+        TweenService:Create(btn, TweenInfo.new(0.2), {Size = UDim2.new(0, 180, 0, 42)}):Play()
+        TweenService:Create(btn, TweenInfo.new(0.2), {BackgroundTransparency = 0}):Play()
+    end)
+    
+    return btn
+end
+
+-- 功能1页按钮
+local btn1 = createModernButton(FeaturePage1, "老外脚本不用解卡", 30, Color3.fromRGB(80, 120, 200), "10734951820")
+local btn2 = createModernButton(FeaturePage1, "空中家具要解卡", 85, Color3.fromRGB(100, 140, 220), "10734951820")
+local btn3 = createModernButton(FeaturePage1, "要解卡密", 140, Color3.fromRGB(120, 160, 240), "10734951820")
+
+-- 按钮功能
 btn1.MouseButton1Click:Connect(function()
-    loadstring(game:HttpGet(script1Url))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/VapeVoidware/VW-Add/main/nightsintheforest.lua"))()
 end)
 
-local script2Url = "https://raw.githubusercontent.com/kedd063/KdmlScripts/refs/heads/main/SkyBaseMakerV1.lua"
-local btn2 = Instance.new("TextButton", FeaturePage1)
-btn2.Size = UDim2.new(0, 160, 0, 36)
-btn2.Position = UDim2.new(0, 24, 0, 72)
-btn2.BackgroundColor3 = Color3.fromRGB(100, 120, 200)
-btn2.Text = "空中家具要解卡"
-btn2.Font = Enum.Font.GothamBold
-btn2.TextSize = 14
-btn2.TextColor3 = Color3.new(1, 1, 1)
-local corner2 = Instance.new("UICorner", btn2)
-corner2.CornerRadius = UDim.new(0, 8)
 btn2.MouseButton1Click:Connect(function()
-    loadstring(game:HttpGet(script2Url))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/kedd063/KdmlScripts/refs/heads/main/SkyBaseMakerV1.lua"))()
 end)
 
-local script3Url = "https://raw.githubusercontent.com/H4xScripts/Loader/refs/heads/main/loader.lua"
-local btn3 = Instance.new("TextButton", FeaturePage1)
-btn3.Size = UDim2.new(0, 160, 0, 36)
-btn3.Position = UDim2.new(0, 24, 0, 120)
-btn3.BackgroundColor3 = Color3.fromRGB(120, 140, 220)
-btn3.Text = "要解卡密"
-btn3.Font = Enum.Font.GothamBold
-btn3.TextSize = 14
-btn3.TextColor3 = Color3.new(1, 1, 1)
-local corner3 = Instance.new("UICorner", btn3)
-corner3.CornerRadius = UDim.new(0, 8)
 btn3.MouseButton1Click:Connect(function()
-    loadstring(game:HttpGet(script3Url))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/H4xScripts/Loader/refs/heads/main/loader.lua"))()
 end)
 
--- ========== 你可以继续复制上面几行再加更多按钮，改名/改链接/改Y坐标即可 ==========
-
+-- 页签切换
 local pages = {
     [infoTab] = InfoPage,
     [func1Tab] = FeaturePage1,
     [func2Tab] = FeaturePage2,
     [func3Tab] = FeaturePage3
 }
+
 for _, btn in pairs(TabBtns) do
     btn.MouseButton1Click:Connect(function()
         InfoPage.Visible = false
         FeaturePage1.Visible = false
         FeaturePage2.Visible = false
         FeaturePage3.Visible = false
+        
         if pages[btn] then
             pages[btn].Visible = true
         end
     end)
 end
 
--- ===== 可拖动的迷你开关按钮 =====
-local ToggleBtn = Instance.new("TextButton")
+-- ===== 高级悬浮窗按钮 =====
+local ToggleBtn = Instance.new("ImageButton")
 ToggleBtn.Name = "ToggleButton"
-ToggleBtn.Size = UDim2.new(0, 80, 0, 30)
+ToggleBtn.Size = UDim2.new(0, 50, 0, 50)
 ToggleBtn.Position = UDim2.new(0, 20, 0, 20)
-ToggleBtn.Text = "打开脚本"
-ToggleBtn.Font = Enum.Font.GothamBold
-ToggleBtn.TextSize = 12
-ToggleBtn.BackgroundColor3 = Color3.fromRGB(80, 100, 180)
-ToggleBtn.TextColor3 = Color3.new(1, 1, 1)
+ToggleBtn.BackgroundColor3 = Color3.fromRGB(60, 80, 160)
+ToggleBtn.Image = "rbxassetid://10734951820" -- 菜单图标
 ToggleBtn.Parent = Main
 
-local ToggleCorner = Instance.new("UICorner")
-ToggleCorner.CornerRadius = UDim.new(0, 8)
-ToggleCorner.Parent = ToggleBtn
+local ToggleCorner = Instance.new("UICorner", ToggleBtn)
+ToggleCorner.CornerRadius = UDim.new(1, 0)
+
+local ToggleStroke = Instance.new("UIStroke", ToggleBtn)
+ToggleStroke.Thickness = 2
+ToggleStroke.Color = Color3.fromRGB(180, 180, 255)
+
+-- 悬浮窗动画
+ToggleBtn.MouseEnter:Connect(function()
+    TweenService:Create(ToggleBtn, TweenInfo.new(0.3), {Size = UDim2.new(0, 55, 0, 55), Rotation = 90}):Play()
+end)
+
+ToggleBtn.MouseLeave:Connect(function()
+    TweenService:Create(ToggleBtn, TweenInfo.new(0.3), {Size = UDim2.new(0, 50, 0, 50), Rotation = 0}):Play()
+end)
 
 -- 拖动逻辑
-local btnDragging, btnDragStart, btnStartPos
-local function handleDrag(input)
-    if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
+local btnDragging = false
+local btnDragStart, btnStartPos
+
+ToggleBtn.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
         btnDragging = true
         btnDragStart = input.Position
         btnStartPos = ToggleBtn.Position
-        local conn
-        conn = input.Changed:Connect(function()
-            if input.UserInputState == Enum.UserInputState.End then
-                btnDragging = false
-                if conn then conn:Disconnect() end
-            end
-        end)
-    end
-end
-ToggleBtn.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-        local startTime = tick()
-        local startPos = input.Position
-        local dragCheck
-        dragCheck = game:GetService("RunService").Heartbeat:Connect(function()
-            if tick() - startTime > 0.1 then
-                dragCheck:Disconnect()
-                if (input.Position - startPos).Magnitude > 5 then
-                    handleDrag(input)
-                end
-            end
-        end)
     end
 end)
+
 UIS.InputChanged:Connect(function(input)
-    if btnDragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+    if btnDragging and input.UserInputType == Enum.UserInputType.MouseMovement then
         local delta = input.Position - btnDragStart
         ToggleBtn.Position = btnStartPos + UDim2.new(0, delta.X, 0, delta.Y)
     end
 end)
 
--- 主窗口拖动逻辑
-local frameDragging, frameDragStart, frameStartPos
-TopBar.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-        local startTime = tick()
-        local startPos = input.Position
-        local dragCheck
-        dragCheck = game:GetService("RunService").Heartbeat:Connect(function()
-            if tick() - startTime > 0.1 then
-                dragCheck:Disconnect()
-                if (input.Position - startPos).Magnitude > 5 then
-                    frameDragging = true
-                    frameDragStart = input.Position
-                    frameStartPos = Frame.Position
-                    local conn
-                    conn = input.Changed:Connect(function()
-                        if input.UserInputState == Enum.UserInputState.End then
-                            frameDragging = false
-                            if conn then conn:Disconnect() end
-                        end
-                    end)
-                end
-            end
-        end)
+UIS.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        btnDragging = false
     end
 end)
+
+-- 主窗口拖动逻辑
+local frameDragging = false
+local frameDragStart, frameStartPos
+
+TopBar.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        frameDragging = true
+        frameDragStart = input.Position
+        frameStartPos = Frame.Position
+    end
+end)
+
 UIS.InputChanged:Connect(function(input)
-    if frameDragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+    if frameDragging and input.UserInputType == Enum.UserInputType.MouseMovement then
         local delta = input.Position - frameDragStart
         Frame.Position = frameStartPos + UDim2.new(0, delta.X, 0, delta.Y)
     end
 end)
 
--- 切换显示/隐藏
-ToggleBtn.MouseButton1Click:Connect(function()
-    Frame.Visible = not Frame.Visible
-    ToggleBtn.Text = Frame.Visible and "关闭脚本" or "打开脚本"
+UIS.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        frameDragging = false
+    end
 end)
 
--- 初始显示信息页
+-- 切换显示/隐藏（带动画）
+ToggleBtn.MouseButton1Click:Connect(function()
+    Frame.Visible = not Frame.Visible
+    if Frame.Visible then
+        TweenService:Create(Frame, TweenInfo.new(0.5, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = UDim2.new(0, 520, 0, 340), Position = UDim2.new(0.5, -260, 0.5, -170)}):Play()
+        ToggleBtn.Image = "rbxassetid://10734951820" -- 关闭图标
+    else
+        TweenService:Create(Frame, TweenInfo.new(0.3), {Size = UDim2.new(0, 0, 0, 0), Position = UDim2.new(0.5, 0, 0.5, 0)}):Play()
+        ToggleBtn.Image = "rbxassetid://10734951820" -- 菜单图标
+    end
+end)
+
+-- 初始状态
 InfoPage.Visible = true
 FeaturePage1.Visible = false
 FeaturePage2.Visible = false
 FeaturePage3.Visible = false
 
-print("Chmao脚本中心UI(净版)已加载！")
+print("🎉 高级WOW加载器已加载！")
+
+-- 启动动画
+coroutine.wrap(function()
+    ToggleBtn.Size = UDim2.new(0, 0, 0, 0)
+    TweenService:Create(ToggleBtn, TweenInfo.new(0.8, Enum.EasingStyle.Elastic), {Size = UDim2.new(0, 50, 0, 50)}):Play()
+end)()
